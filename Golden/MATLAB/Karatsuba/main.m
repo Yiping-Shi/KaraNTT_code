@@ -19,7 +19,7 @@ q = 998244353;  % Modulus (prime near 2^30)
 analyze_matrices(EVAL, INTERP, POSTprocess);
 fprintf('\n');
 % Generate RTL-compatible matrix definitions
-% generate_rtl_matrices(EVAL, POSTprocess);
+generate_rtl_matrices(EVAL, POSTprocess);
 
 % Performance comparison test
 compare_methods(1000, q, EVAL, POSTprocess);
