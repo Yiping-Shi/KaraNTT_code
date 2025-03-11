@@ -4,14 +4,13 @@
 
 `timescale 1ns / 1ps
 `include "global_params.vh"
-`include "matrix_coefficients.vh"
 
 module elementwise_mult (
     input  logic                  clk,
     input  logic                  rst_n,
-    input  logic [`ACC_WIDTH-1:0] a_eval[0:`EVAL_ROWS-1], // Evaluation of a(x)
-    input  logic [`ACC_WIDTH-1:0] b_eval[0:`EVAL_ROWS-1], // Evaluation of b(x)
-    output logic [`ACC_WIDTH-1:0] c_eval[0:`EVAL_ROWS-1]  // Element-wise multiplication result
+    input  logic [`ACC_WIDTH-1:0]  a_eval[0:`EVAL_ROWS-1], // Evaluation of a(x)
+    input  logic [`ACC_WIDTH-1:0]  b_eval[0:`EVAL_ROWS-1], // Evaluation of b(x)
+    output logic [`MULT_WIDTH-1:0] c_eval[0:`EVAL_ROWS-1]  // Element-wise multiplication result
 );
 
     // Internal signals (used for pipeline stages)

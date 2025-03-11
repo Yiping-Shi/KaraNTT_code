@@ -3,7 +3,6 @@
 
 `timescale 1ns / 1ps
 `include "global_params.vh"
-`include "matrix_coefficients.vh"
 
 module top_karatsuba_multiplier (
     input  logic                  clk,
@@ -17,6 +16,7 @@ module top_karatsuba_multiplier (
     logic [`ACC_WIDTH-1:0]  a_eval[`EVAL_ROWS-1:0];
     logic [`ACC_WIDTH-1:0]  b_eval[`EVAL_ROWS-1:0];
     logic [`MULT_WIDTH-1:0] c_eval[`EVAL_ROWS-1:0];
+    logic [`MULT_WIDTH-1:0] c_temp[`N-1:0];
 
     // -----------------------------------------------------------------------
     // Stage 1: Evaluation of a(x) and b(x)
@@ -48,7 +48,22 @@ module top_karatsuba_multiplier (
         .clk(clk),
         .rst_n(rst_n),
         .c_eval(c_eval),
-        .c(c)
+        .c(c_temp)
     );
+
+    // -----------------------------------------------------------------------
+    // Stage 4: Barrett reduction
+    // -----------------------------------------------------------------------
+    genvar i;
+    generate
+        for (i=0; i<`N; i++) begin : barrett_reducers
+            barrett_reduce u_barrett_reduce (
+                .clk(clk),
+                .rst_n(rst_n),
+                .value_in(c_temp[i]),
+                .result_out(c[i])
+            );
+        end
+    endgenerate
 
 endmodule

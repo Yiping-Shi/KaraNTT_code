@@ -49,12 +49,12 @@ module karatsuba_multiplier_tb;
         
         // 设置输入
         // 多项式A: x^2 + 2x + 3
-        a[0] = 3; a[1] = 2; a[2] = 1;
-        for (int i = 3; i < `N; i++) a[i] = 0;
+        a[0] <= 3; a[1] <= 2; a[2] <= 1;
+        for (int i = 3; i < `N; i++) a[i] <= 0;
         
         // 多项式B: x^2 + x + 1
-        b[0] = 1; b[1] = 1; b[2] = 1;
-        for (int i = 3; i < `N; i++) b[i] = 0;
+        b[0] <= 1; b[1] <= 1; b[2] <= 1;
+        for (int i = 3; i < `N; i++) b[i] <= 0;
         
         // 等待固定延迟 - 乘法器总延迟为9个周期
         repeat(10) @(posedge clk); // 多等1个周期确保结果稳定
@@ -66,8 +66,8 @@ module karatsuba_multiplier_tb;
         
         // 生成随机输入
         for (int i = 0; i < `N; i++) begin
-            a[i] = $urandom % `Q;
-            b[i] = $urandom % `Q;
+            a[i] <= $urandom % `Q;
+            b[i] <= $urandom % `Q;
         end
         
         
@@ -81,8 +81,8 @@ module karatsuba_multiplier_tb;
         
         // 设置所有系数为Q-1（边界值）
         for (int i = 0; i < `N; i++) begin
-            a[i] = `Q - 1;
-            b[i] = `Q - 1;
+            a[i] <= `Q - 1;
+            b[i] <= `Q - 1;
         end
         
         // 等待固定延迟

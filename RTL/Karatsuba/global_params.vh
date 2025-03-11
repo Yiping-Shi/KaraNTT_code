@@ -18,3 +18,12 @@
 
 // Elememt-wise multiplication result width
 `define MULT_WIDTH 90
+
+
+`define EVAL_ROWS 81
+`define EVAL_COLS 16
+`define EVAL_NONZEROS 256
+
+`define POSTPROC_ROWS 16
+`define POSTPROC_COLS 81
+`define POSTPROC_NONZEROS 625
