@@ -8,14 +8,14 @@
 module barrett_reduce(
     input  logic                   clk,
     input  logic                   rst_n,
-    input  logic [`ACC_WIDTH-1:0]  value_in,  // Large value to reduce
+    input  logic [`MULT_WIDTH-1:0]  value_in,  // Large value to reduce
     output logic [`DATA_WIDTH-1:0] result_out // Result = value_in mod Q
 );
     // Constants
     localparam logic [`DATA_WIDTH*2-1:0] twoQ = (`Q << 1);
 
     // Stage 1: Input handling
-    logic [`ACC_WIDTH-1:0]    s1_value;
+    logic [`MULT_WIDTH-1:0]    s1_value;
     logic [`DATA_WIDTH*2-1:0] s1_Q_approx;
 
     always_ff @(posedge clk or negedge rst_n) begin

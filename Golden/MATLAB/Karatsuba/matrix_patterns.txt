@@ -1,0 +1,107 @@
+==========================================
+EVAL矩阵非零元素模式 (81x16，每行)
+==========================================
+
+a_eval[0] = a[0];
+a_eval[1] = a[0] + a[1];
+a_eval[2] = a[1];
+a_eval[3] = a[0] + a[2];
+a_eval[4] = a[0] + a[1] + a[2] + a[3];
+a_eval[5] = a[1] + a[3];
+a_eval[6] = a[2];
+a_eval[7] = a[2] + a[3];
+a_eval[8] = a[3];
+a_eval[9] = a[0] + a[4];
+a_eval[10] = a[0] + a[1] + a[4] + a[5];
+a_eval[11] = a[1] + a[5];
+a_eval[12] = a[0] + a[2] + a[4] + a[6];
+a_eval[13] = a[0] + a[1] + a[2] + a[3] + a[4] + a[5] + a[6] + a[7];
+a_eval[14] = a[1] + a[3] + a[5] + a[7];
+a_eval[15] = a[2] + a[6];
+a_eval[16] = a[2] + a[3] + a[6] + a[7];
+a_eval[17] = a[3] + a[7];
+a_eval[18] = a[4];
+a_eval[19] = a[4] + a[5];
+a_eval[20] = a[5];
+a_eval[21] = a[4] + a[6];
+a_eval[22] = a[4] + a[5] + a[6] + a[7];
+a_eval[23] = a[5] + a[7];
+a_eval[24] = a[6];
+a_eval[25] = a[6] + a[7];
+a_eval[26] = a[7];
+a_eval[27] = a[0] + a[8];
+a_eval[28] = a[0] + a[1] + a[8] + a[9];
+a_eval[29] = a[1] + a[9];
+a_eval[30] = a[0] + a[2] + a[8] + a[10];
+a_eval[31] = a[0] + a[1] + a[2] + a[3] + a[8] + a[9] + a[10] + a[11];
+a_eval[32] = a[1] + a[3] + a[9] + a[11];
+a_eval[33] = a[2] + a[10];
+a_eval[34] = a[2] + a[3] + a[10] + a[11];
+a_eval[35] = a[3] + a[11];
+a_eval[36] = a[0] + a[4] + a[8] + a[12];
+a_eval[37] = a[0] + a[1] + a[4] + a[5] + a[8] + a[9] + a[12] + a[13];
+a_eval[38] = a[1] + a[5] + a[9] + a[13];
+a_eval[39] = a[0] + a[2] + a[4] + a[6] + a[8] + a[10] + a[12] + a[14];
+a_eval[40] = a[0] + a[1] + a[2] + a[3] + a[4] + a[5] + a[6] + a[7] + a[8] + a[9] + a[10] + a[11] + a[12] + a[13] + a[14] + a[15];
+a_eval[41] = a[1] + a[3] + a[5] + a[7] + a[9] + a[11] + a[13] + a[15];
+a_eval[42] = a[2] + a[6] + a[10] + a[14];
+a_eval[43] = a[2] + a[3] + a[6] + a[7] + a[10] + a[11] + a[14] + a[15];
+a_eval[44] = a[3] + a[7] + a[11] + a[15];
+a_eval[45] = a[4] + a[12];
+a_eval[46] = a[4] + a[5] + a[12] + a[13];
+a_eval[47] = a[5] + a[13];
+a_eval[48] = a[4] + a[6] + a[12] + a[14];
+a_eval[49] = a[4] + a[5] + a[6] + a[7] + a[12] + a[13] + a[14] + a[15];
+a_eval[50] = a[5] + a[7] + a[13] + a[15];
+a_eval[51] = a[6] + a[14];
+a_eval[52] = a[6] + a[7] + a[14] + a[15];
+a_eval[53] = a[7] + a[15];
+a_eval[54] = a[8];
+a_eval[55] = a[8] + a[9];
+a_eval[56] = a[9];
+a_eval[57] = a[8] + a[10];
+a_eval[58] = a[8] + a[9] + a[10] + a[11];
+a_eval[59] = a[9] + a[11];
+a_eval[60] = a[10];
+a_eval[61] = a[10] + a[11];
+a_eval[62] = a[11];
+a_eval[63] = a[8] + a[12];
+a_eval[64] = a[8] + a[9] + a[12] + a[13];
+a_eval[65] = a[9] + a[13];
+a_eval[66] = a[8] + a[10] + a[12] + a[14];
+a_eval[67] = a[8] + a[9] + a[10] + a[11] + a[12] + a[13] + a[14] + a[15];
+a_eval[68] = a[9] + a[11] + a[13] + a[15];
+a_eval[69] = a[10] + a[14];
+a_eval[70] = a[10] + a[11] + a[14] + a[15];
+a_eval[71] = a[11] + a[15];
+a_eval[72] = a[12];
+a_eval[73] = a[12] + a[13];
+a_eval[74] = a[13];
+a_eval[75] = a[12] + a[14];
+a_eval[76] = a[12] + a[13] + a[14] + a[15];
+a_eval[77] = a[13] + a[15];
+a_eval[78] = a[14];
+a_eval[79] = a[14] + a[15];
+a_eval[80] = a[15];
+
+
+==========================================
+POSTprocess矩阵非零元素模式 (16x81，每行)
+==========================================
+
+result[0] = c_eval[0] + c_eval[2] - c_eval[5] - c_eval[6] + c_eval[8] - c_eval[11] + c_eval[14] + c_eval[15] - c_eval[17] + c_eval[18] + c_eval[20] - c_eval[23] - c_eval[24] + c_eval[26] - c_eval[29] + c_eval[32] + c_eval[33] - c_eval[35] + c_eval[38] - c_eval[41] - c_eval[42] + c_eval[44] - c_eval[45] - c_eval[47] + c_eval[50] + c_eval[51] - c_eval[53] - c_eval[54] + c_eval[56] - c_eval[59] - c_eval[60] + c_eval[62] - c_eval[65] + c_eval[68] + c_eval[69] - c_eval[71] + c_eval[72] + c_eval[74] - c_eval[77] - c_eval[78] + c_eval[80];
+result[1] = - c_eval[0] + c_eval[1] - c_eval[2] + c_eval[6] - c_eval[7] + c_eval[8] - c_eval[15] + c_eval[16] - c_eval[17] - c_eval[18] + c_eval[19] - c_eval[20] + c_eval[24] - c_eval[25] + c_eval[26] - c_eval[33] + c_eval[34] - c_eval[35] + c_eval[42] - c_eval[43] + c_eval[44] + c_eval[45] - c_eval[46] + c_eval[47] - c_eval[51] + c_eval[52] - c_eval[53] + c_eval[54] - c_eval[55] + c_eval[56] + c_eval[60] - c_eval[61] + c_eval[62] - c_eval[69] + c_eval[70] - c_eval[71] - c_eval[72] + c_eval[73] - c_eval[74] + c_eval[78] - c_eval[79] + c_eval[80];
+result[2] = - c_eval[0] + c_eval[2] + c_eval[3] - c_eval[6] - c_eval[8] + c_eval[17] - c_eval[18] + c_eval[20] + c_eval[21] - c_eval[24] - c_eval[26] + c_eval[35] - c_eval[44] + c_eval[45] - c_eval[47] - c_eval[48] + c_eval[51] + c_eval[53] + c_eval[54] - c_eval[56] - c_eval[57] + c_eval[60] - c_eval[62] + c_eval[71] - c_eval[72] + c_eval[74] + c_eval[75] - c_eval[78] - c_eval[80];
+result[3] = c_eval[0] - c_eval[1] + c_eval[2] - c_eval[3] + c_eval[4] - c_eval[5] + c_eval[6] - c_eval[7] + c_eval[8] + c_eval[18] - c_eval[19] + c_eval[20] - c_eval[21] + c_eval[22] - c_eval[23] + c_eval[24] - c_eval[25] + c_eval[26] - c_eval[45] + c_eval[46] - c_eval[47] + c_eval[48] - c_eval[49] + c_eval[50] - c_eval[51] + c_eval[52] - c_eval[53] - c_eval[54] + c_eval[55] - c_eval[56] + c_eval[57] - c_eval[58] + c_eval[59] - c_eval[60] + c_eval[61] - c_eval[62] + c_eval[72] - c_eval[73] + c_eval[74] - c_eval[75] + c_eval[76] - c_eval[77] + c_eval[78] - c_eval[79] + c_eval[80];
+result[4] = - c_eval[0] - c_eval[2] + c_eval[5] + c_eval[6] - c_eval[8] + c_eval[9] - c_eval[18] - c_eval[20] + c_eval[23] + c_eval[24] - c_eval[26] + c_eval[47] - c_eval[50] - c_eval[51] + c_eval[53] + c_eval[54] + c_eval[56] - c_eval[59] - c_eval[60] + c_eval[62] - c_eval[63] + c_eval[72] - c_eval[74] + c_eval[77] + c_eval[78] - c_eval[80];
+result[5] = c_eval[0] - c_eval[1] + c_eval[2] - c_eval[6] + c_eval[7] - c_eval[8] - c_eval[9] + c_eval[10] - c_eval[11] + c_eval[18] - c_eval[19] + c_eval[20] - c_eval[24] + c_eval[25] - c_eval[26] + c_eval[51] - c_eval[52] + c_eval[53] - c_eval[54] + c_eval[55] - c_eval[56] + c_eval[60] - c_eval[61] + c_eval[62] + c_eval[63] - c_eval[64] + c_eval[65] - c_eval[72] + c_eval[73] - c_eval[74] - c_eval[78] + c_eval[79] - c_eval[80];
+result[6] = c_eval[0] - c_eval[2] - c_eval[3] + c_eval[6] + c_eval[8] - c_eval[9] + c_eval[11] + c_eval[12] - c_eval[15] + c_eval[18] - c_eval[20] - c_eval[21] + c_eval[24] + c_eval[26] - c_eval[53] - c_eval[54] + c_eval[56] + c_eval[57] - c_eval[60] - c_eval[62] + c_eval[63] - c_eval[65] - c_eval[66] + c_eval[69] - c_eval[72] + c_eval[74] + c_eval[75] - c_eval[78] + c_eval[80];
+result[7] = - c_eval[0] + c_eval[1] - c_eval[2] + c_eval[3] - c_eval[4] + c_eval[5] - c_eval[6] + c_eval[7] - c_eval[8] + c_eval[9] - c_eval[10] + c_eval[11] - c_eval[12] + c_eval[13] - c_eval[14] + c_eval[15] - c_eval[16] + c_eval[17] - c_eval[18] + c_eval[19] - c_eval[20] + c_eval[21] - c_eval[22] + c_eval[23] - c_eval[24] + c_eval[25] - c_eval[26] + c_eval[54] - c_eval[55] + c_eval[56] - c_eval[57] + c_eval[58] - c_eval[59] + c_eval[60] - c_eval[61] + c_eval[62] - c_eval[63] + c_eval[64] - c_eval[65] + c_eval[66] - c_eval[67] + c_eval[68] - c_eval[69] + c_eval[70] - c_eval[71] + c_eval[72] - c_eval[73] + c_eval[74] - c_eval[75] + c_eval[76] - c_eval[77] + c_eval[78] - c_eval[79] + c_eval[80];
+result[8] = - c_eval[0] + c_eval[2] - c_eval[5] - c_eval[6] + c_eval[8] - c_eval[11] + c_eval[14] + c_eval[15] - c_eval[17] + c_eval[18] + c_eval[20] - c_eval[23] - c_eval[24] + c_eval[26] + c_eval[27] - c_eval[54] - c_eval[56] + c_eval[59] + c_eval[60] - c_eval[62] + c_eval[65] - c_eval[68] - c_eval[69] + c_eval[71] - c_eval[72] - c_eval[74] + c_eval[77] + c_eval[78] - c_eval[80];
+result[9] = c_eval[0] - c_eval[1] + c_eval[2] + c_eval[6] - c_eval[7] + c_eval[8] - c_eval[15] + c_eval[16] - c_eval[17] - c_eval[18] + c_eval[19] - c_eval[20] + c_eval[24] - c_eval[25] + c_eval[26] - c_eval[27] + c_eval[28] - c_eval[29] + c_eval[54] - c_eval[55] + c_eval[56] - c_eval[60] + c_eval[61] - c_eval[62] + c_eval[69] - c_eval[70] + c_eval[71] + c_eval[72] - c_eval[73] + c_eval[74] - c_eval[78] + c_eval[79] - c_eval[80];
+result[10] = c_eval[0] - c_eval[2] - c_eval[3] + c_eval[6] - c_eval[8] + c_eval[17] - c_eval[18] + c_eval[20] + c_eval[21] - c_eval[24] - c_eval[26] - c_eval[27] + c_eval[29] + c_eval[30] - c_eval[33] + c_eval[54] - c_eval[56] - c_eval[57] + c_eval[60] + c_eval[62] - c_eval[71] + c_eval[72] - c_eval[74] - c_eval[75] + c_eval[78] + c_eval[80];
+result[11] = - c_eval[0] + c_eval[1] - c_eval[2] + c_eval[3] - c_eval[4] + c_eval[5] - c_eval[6] + c_eval[7] - c_eval[8] + c_eval[18] - c_eval[19] + c_eval[20] - c_eval[21] + c_eval[22] - c_eval[23] + c_eval[24] - c_eval[25] + c_eval[26] + c_eval[27] - c_eval[28] + c_eval[29] - c_eval[30] + c_eval[31] - c_eval[32] + c_eval[33] - c_eval[34] + c_eval[35] - c_eval[54] + c_eval[55] - c_eval[56] + c_eval[57] - c_eval[58] + c_eval[59] - c_eval[60] + c_eval[61] - c_eval[62] - c_eval[72] + c_eval[73] - c_eval[74] + c_eval[75] - c_eval[76] + c_eval[77] - c_eval[78] + c_eval[79] - c_eval[80];
+result[12] = c_eval[0] + c_eval[2] - c_eval[5] - c_eval[6] + c_eval[8] - c_eval[9] + c_eval[18] - c_eval[20] + c_eval[23] + c_eval[24] - c_eval[26] - c_eval[27] - c_eval[29] + c_eval[32] + c_eval[33] - c_eval[35] + c_eval[36] - c_eval[45] + c_eval[54] + c_eval[56] - c_eval[59] - c_eval[60] + c_eval[62] - c_eval[63] + c_eval[72] + c_eval[74] - c_eval[77] - c_eval[78] + c_eval[80];
+result[13] = - c_eval[0] + c_eval[1] - c_eval[2] + c_eval[6] - c_eval[7] + c_eval[8] + c_eval[9] - c_eval[10] + c_eval[11] - c_eval[18] + c_eval[19] - c_eval[20] - c_eval[24] + c_eval[25] - c_eval[26] + c_eval[27] - c_eval[28] + c_eval[29] - c_eval[33] + c_eval[34] - c_eval[35] - c_eval[36] + c_eval[37] - c_eval[38] + c_eval[45] - c_eval[46] + c_eval[47] - c_eval[54] + c_eval[55] - c_eval[56] + c_eval[60] - c_eval[61] + c_eval[62] + c_eval[63] - c_eval[64] + c_eval[65] - c_eval[72] + c_eval[73] - c_eval[74] + c_eval[78] - c_eval[79] + c_eval[80];
+result[14] = - c_eval[0] + c_eval[2] + c_eval[3] - c_eval[6] - c_eval[8] + c_eval[9] - c_eval[11] - c_eval[12] + c_eval[15] - c_eval[18] + c_eval[20] + c_eval[21] - c_eval[24] + c_eval[26] + c_eval[27] - c_eval[29] - c_eval[30] + c_eval[33] + c_eval[35] - c_eval[36] + c_eval[38] + c_eval[39] - c_eval[42] + c_eval[45] - c_eval[47] - c_eval[48] + c_eval[51] - c_eval[54] + c_eval[56] + c_eval[57] - c_eval[60] - c_eval[62] + c_eval[63] - c_eval[65] - c_eval[66] + c_eval[69] - c_eval[72] + c_eval[74] + c_eval[75] - c_eval[78] - c_eval[80];
+result[15] = c_eval[0] - c_eval[1] + c_eval[2] - c_eval[3] + c_eval[4] - c_eval[5] + c_eval[6] - c_eval[7] + c_eval[8] - c_eval[9] + c_eval[10] - c_eval[11] + c_eval[12] - c_eval[13] + c_eval[14] - c_eval[15] + c_eval[16] - c_eval[17] + c_eval[18] - c_eval[19] + c_eval[20] - c_eval[21] + c_eval[22] - c_eval[23] + c_eval[24] - c_eval[25] + c_eval[26] - c_eval[27] + c_eval[28] - c_eval[29] + c_eval[30] - c_eval[31] + c_eval[32] - c_eval[33] + c_eval[34] - c_eval[35] + c_eval[36] - c_eval[37] + c_eval[38] - c_eval[39] + c_eval[40] - c_eval[41] + c_eval[42] - c_eval[43] + c_eval[44] - c_eval[45] + c_eval[46] - c_eval[47] + c_eval[48] - c_eval[49] + c_eval[50] - c_eval[51] + c_eval[52] - c_eval[53] + c_eval[54] - c_eval[55] + c_eval[56] - c_eval[57] + c_eval[58] - c_eval[59] + c_eval[60] - c_eval[61] + c_eval[62] - c_eval[63] + c_eval[64] - c_eval[65] + c_eval[66] - c_eval[67] + c_eval[68] - c_eval[69] + c_eval[70] - c_eval[71] + c_eval[72] - c_eval[73] + c_eval[74] - c_eval[75] + c_eval[76] - c_eval[77] + c_eval[78] - c_eval[79] + c_eval[80];

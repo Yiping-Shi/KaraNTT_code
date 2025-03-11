@@ -14,4 +14,7 @@
 `define DATA_WIDTH 30
 
 // Accumulation result maximum width
-`define ACC_WIDTH 74
+`define ACC_WIDTH 45
+
+// Elememt-wise multiplication result width
+`define MULT_WIDTH 90
