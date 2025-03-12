@@ -14,10 +14,13 @@
 `define DATA_WIDTH 30
 
 // Accumulation result maximum width
-`define ACC_WIDTH 45
+`define ACC_WIDTH 34
 
 // Elememt-wise multiplication result width
-`define MULT_WIDTH 90
+`define MULT_WIDTH 68
+
+// BRAM ADDR DEPTH
+`define BRAM_DEPTH 12 // 2^12 = 4096
 
 
 `define EVAL_ROWS 81

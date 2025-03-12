@@ -1,0 +1,64 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
+| Date         : Wed Mar 12 15:31:09 2025
+| Host         : DESKTOP-PVV6JB1 running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file {D:\IDEA\NTT_Kara_25\utilization_by_module.rpt}
+| Design       : top_karatsuba_multiplier
+| Device       : xcvu9p-flga2104-2L-e
+| Speed File   : -2L
+| Design State : Synthesized
+--------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++-----------------------------------------+-----------------------+------------+------------+---------+------+-------+--------+--------+------+------------+
+|                 Instance                |         Module        | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | URAM | DSP Blocks |
++-----------------------------------------+-----------------------+------------+------------+---------+------+-------+--------+--------+------+------------+
+| top_karatsuba_multiplier                |                 (top) |      47463 |      47463 |       0 |    0 | 22099 |     33 |      1 |    0 |        484 |
+|   (top_karatsuba_multiplier)            |                 (top) |          2 |          2 |       0 |    0 |   177 |      0 |      0 |    0 |          0 |
+|   barrett_reducers[0].u_barrett_reduce  |        barrett_reduce |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[10].u_barrett_reduce |      barrett_reduce_0 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[11].u_barrett_reduce |      barrett_reduce_1 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[12].u_barrett_reduce |      barrett_reduce_2 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[13].u_barrett_reduce |      barrett_reduce_3 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[14].u_barrett_reduce |      barrett_reduce_4 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[15].u_barrett_reduce |      barrett_reduce_5 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[1].u_barrett_reduce  |      barrett_reduce_6 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[2].u_barrett_reduce  |      barrett_reduce_7 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[3].u_barrett_reduce  |      barrett_reduce_8 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[4].u_barrett_reduce  |      barrett_reduce_9 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[5].u_barrett_reduce  |     barrett_reduce_10 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[6].u_barrett_reduce  |     barrett_reduce_11 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[7].u_barrett_reduce  |     barrett_reduce_12 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[8].u_barrett_reduce  |     barrett_reduce_13 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   barrett_reducers[9].u_barrett_reduce  |     barrett_reduce_14 |        252 |        252 |       0 |    0 |   188 |      0 |      0 |    0 |         10 |
+|   bram_bank[0].u_a_bram                 |                  BRAM |          0 |          0 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[10].u_a_bram                |  BRAM__parameterized9 |          0 |          0 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[11].u_a_bram                | BRAM__parameterized10 |          0 |          0 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[12].u_a_bram                | BRAM__parameterized11 |         32 |         32 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[13].u_a_bram                | BRAM__parameterized12 |          2 |          2 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[14].u_a_bram                | BRAM__parameterized13 |         80 |         80 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[15].u_a_bram                | BRAM__parameterized14 |        254 |        254 |       0 |    0 |     0 |      3 |      1 |    0 |          0 |
+|   bram_bank[1].u_a_bram                 |  BRAM__parameterized0 |         33 |         33 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[2].u_a_bram                 |  BRAM__parameterized1 |          0 |          0 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[3].u_a_bram                 |  BRAM__parameterized2 |          0 |          0 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[4].u_a_bram                 |  BRAM__parameterized3 |         32 |         32 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[5].u_a_bram                 |  BRAM__parameterized4 |          2 |          2 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[6].u_a_bram                 |  BRAM__parameterized5 |         80 |         80 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[7].u_a_bram                 |  BRAM__parameterized6 |          0 |          0 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[8].u_a_bram                 |  BRAM__parameterized7 |          0 |          0 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   bram_bank[9].u_a_bram                 |  BRAM__parameterized8 |         32 |         32 |       0 |    0 |     0 |      2 |      0 |    0 |          0 |
+|   elem_mult                             |      elementwise_mult |      34770 |      34770 |       0 |    0 |  7366 |      0 |      0 |    0 |        324 |
+|   eval_a_b                              |            evaluation |       4786 |       4786 |       0 |    0 |  5224 |      0 |      0 |    0 |          0 |
+|   interp                                |         interpolation |       3326 |       3326 |       0 |    0 |  6324 |      0 |      0 |    0 |          0 |
++-----------------------------------------+-----------------------+------------+------------+---------+------+-------+--------+--------+------+------------+
+
+

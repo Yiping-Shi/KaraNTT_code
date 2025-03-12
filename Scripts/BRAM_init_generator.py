@@ -56,8 +56,8 @@ def generate_bram_init_files():
                     else:
                         coe_file.write("0000000;\n")
         
-        # Create .mem file (for simulation)
-        with open(f"BRAM_mem_files/bank_{bank_id}.mem", "w") as mem_file:
+        # Create .txt file (for simulation)
+        with open(f"BRAM_mem_files/bank_{bank_id}.txt", "w") as mem_file:
             for value in banks[bank_id]:
                 if value != -1:
                     # Convert to 30-bit hex

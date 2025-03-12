@@ -22,5 +22,13 @@
 ## Tips
 
 - Get the information of utilization by module.
-  - `report_utilization -hierarchical -file utilization_by_module.rpt`
--
+  - `report_utilization -hierarchical -file D:\\IDEA\\NTT_Kara_25\\utilization_by_module.rpt`
+- 
+
+## Element-wise Multiplication Optimization
+
+- In the first version, 81 Multpliers are used, where each width is from 45-bit to 90-bit.
+  - This will occupy 729 DSP48E2 in all
+  - 1 Multiplier of 45-bit x 45-bit will occupy 9 DSP48E2
+- DSP48E2 is designed to compute 27-bit x 18-bit signed multiplication.
+  - It can be cascaded to implement larger multiplication.
