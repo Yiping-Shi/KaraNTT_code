@@ -11,13 +11,13 @@
   * [ ] NTT-65536 (Based on radix-16 unit) (4-step NTT)
   * [ ] INTT-65536 (Based on radix-16 unit) (4-step NTT)
   * [ ] Karatsuba / Winograd (16 $\rightarrow$ 81, 81 $\rightarrow$ 16\)
-* [ ] Scripts
+* [X] Scripts
   * [X] BRAM (coe+mem)
-  * [ ] WROM (coe+mem) (NTT+INTT)
+  * [X] WROM (coe+mem) (NTT+INTT)
 * [ ] RTL
   * [ ] NTT-65536 (Based on radix-16 unit) (4-step NTT)
   * [ ] INTT-65536 (Based on radix-16 unit) (4-step NTT)
-  * [ ] Karatsuba / Winograd (16 $\rightarrow$ 81, 81 $\rightarrow$ 16\)
+  * [X] Karatsuba / Winograd (16 $\rightarrow$ 81, 81 $\rightarrow$ 16\)
 
 ## Tips
 
