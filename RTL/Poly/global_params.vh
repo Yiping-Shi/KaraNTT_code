@@ -1,0 +1,17 @@
+`ifndef GLOBAL_PARAMS_VH
+`define GLOBAL_PARAMS_VH
+
+`define Q 998244353
+`define U 1154949187
+`define N 65536
+
+`define PHI     629671588
+`define PHI_INV 283043518
+`define PSI     24514907
+`define PSI_INV 3707709
+`define N_INV   998229121
+
+`define DATA_WIDTH 30
+`define ADDR_WIDTH 4
+
+`endif // GLOBAL_PARAMS_VH

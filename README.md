@@ -19,6 +19,28 @@
   * [ ] INTT-65536 (Based on radix-16 unit) (4-step NTT)
   * [X] Karatsuba / Winograd (16 $\rightarrow$ 81, 81 $\rightarrow$ 16\)
 
+---
+
+* [ ] NTT-based Polynomial Multiplier
+  * [ ] Pymodel
+    * [ ] NTT/INTT-16:   $INTT(NTT(A))==A$,  $INTT(NTT(A)\odot NTT(B))==C$
+    * [ ] 4-stage-NTT
+  * [ ] RTL
+    * [ ] NTT/INTT_65536
+      * [ ] control logic (state machine)
+      * [ ] addr generator
+      * [ ] data reorder (in and out)
+      * [ ] Buffer
+        * [ ] BRAM
+        * [ ] WROM
+      * [ ] IFFT_16
+        * [ ] bit_reverse
+        * [ ] butterfly_stage0/1/2/3
+        * [ ] mod_add
+        * [ ] mod_sub
+        * [ ] mod_mul
+    * [ ] mod_mul x 16
+
 ## Tips
 
 - Get the information of utilization by module.
