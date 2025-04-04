@@ -11,6 +11,11 @@
 `define PSI_INV 3707709
 `define N_INV   998229121
 
+`define PHI_16     929031873
+`define PSI_16     452798380
+`define PSI_16_INV 87557064
+`define N_16_INV   935854081
+
 `define DATA_WIDTH 30
 `define ADDR_WIDTH 4
 
