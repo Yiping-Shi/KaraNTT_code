@@ -2,8 +2,7 @@
 
 module BRAM #(
     parameter DLEN = 30,             // Data Width
-    parameter HLEN = 12,             // Addr Width
-    parameter INIT_FILE = "none"     // Initialization File
+    parameter HLEN = 12             // Addr Width
 )(
     input  logic            clk,
     input  logic            wen,       // WR Enable
@@ -15,13 +14,6 @@ module BRAM #(
 
 // Set Attribute for Block RAM
 (* ram_style="block" *) logic [DLEN-1:0] bram [(1<<HLEN)-1:0];
-
-// Initialize BRAM
-initial begin
-    if (INIT_FILE != "none") begin
-        $readmemh(INIT_FILE, bram);
-    end
-end
 
 // WR Operation
 always @(posedge clk) begin

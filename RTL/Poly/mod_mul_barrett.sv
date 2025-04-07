@@ -60,18 +60,26 @@ end
 // Stage 3: P - (Q_approx * Q)
 logic [`DATA_WIDTH*2-1:0] s4_C;
 
+logic [2*`DATA_WIDTH-1:0] q_mult;
+logic [2*`DATA_WIDTH-1:0] R;
+
+logic [2*`DATA_WIDTH-1:0] twoQ;
+
+always_comb begin
+    q_mult = s3_Q_approx * `Q;
+    R      = s3_P - q_mult;
+    twoQ   = (`Q << 1);
+end
+
 always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         s4_C <= '0;
     end
     else begin
         // 1) R = P - (Q_approx * Q)
-        logic [2*`DATA_WIDTH-1:0] q_mult = s3_Q_approx * `Q;
-        logic [2*`DATA_WIDTH-1:0] R      = s3_P - q_mult;
 
         // 2) 如果 R >= 2Q, R -= 2Q; else if R >= Q, R-= Q
         //    这里要用大位宽比较(>30bit). 
-        logic [2*`DATA_WIDTH-1:0] twoQ = (`Q << 1);
         if (R >= twoQ) begin
             s4_C <= (R - twoQ);
         end

@@ -62,6 +62,22 @@ logic [`DATA_WIDTH-1:0] stage1_out[0:15];
 logic [`DATA_WIDTH-1:0] stage2_out[0:15];
 logic [`DATA_WIDTH-1:0] stage3_out[0:15];
 
+logic [`DATA_WIDTH-1:0] PSI_16_INV_1;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_2;  
+logic [`DATA_WIDTH-1:0] PSI_16_INV_3;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_4;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_5;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_6;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_7;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_8;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_9;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_10;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_11;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_12;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_13;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_14;
+logic [`DATA_WIDTH-1:0] PSI_16_INV_15;
+
 // ----------------------------------------------------------------
 // Twiddle factors generation
 // ----------------------------------------------------------------
@@ -252,28 +268,88 @@ gs_butterfly_unit u17_gs_butterfly_unit(
 
 // ----------------------------------------------------------------
 // Stage 2: {0,4} {1,5} {2,6} {3,7} {8,12} {9,13} {10,14} {11,15}
-// 双循环优化版本
 // ----------------------------------------------------------------
-genvar grp1, idx1;
-generate
-    for (grp1 = 0; grp1 < 2; grp1 = grp1 + 1) begin: stage1_group
-        for (idx1 = 0; idx1 < 4; idx1 = idx1 + 1) begin: stage1_unit
-            localparam integer BASE_ADDR  = grp1 ? 8 : 0;        // 组基地址选择
-            localparam integer IDX_OFFSET = BASE_ADDR + idx1;    // 实际索引计算
-            localparam W_TYPE  PSI_SELECT = grp1 ? PSI_16_INV_12 : PSI_16_INV_4; // 旋转因子选择
-            
-            gs_butterfly_unit u2_gs_butterfly_unit(
-                .clk(clk),
-                .rst_n(rst_n),
-                .din_0(stage1_out[IDX_OFFSET]),       // 输入索引0: 0-3,8-11
-                .din_1(stage1_out[IDX_OFFSET + 4]),   // 输入索引1: 4-7,12-15
-                .w(PSI_SELECT),                       // 分组选择旋转因子
-                .dout_0(stage2_out[IDX_OFFSET]),      // 输出索引0: 0-3,8-11
-                .dout_1(stage2_out[IDX_OFFSET + 4])   // 输出索引1: 4-7,12-15
-            );
-        end
-    end
-endgenerate
+gs_butterfly_unit u20_gs_butterfly_unit(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .din_0(stage1_out[0]),
+    .din_1(stage1_out[4]),
+    .w(PSI_16_INV_4),
+    .dout_0(stage2_out[0]),
+    .dout_1(stage2_out[4])
+);
+gs_butterfly_unit u21_gs_butterfly_unit(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .din_0(stage1_out[1]),
+    .din_1(stage1_out[5]),
+    .w(PSI_16_INV_4),
+    .dout_0(stage2_out[1]),
+    .dout_1(stage2_out[5])
+);
+gs_butterfly_unit u22_gs_butterfly_unit(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .din_0(stage1_out[2]),
+    .din_1(stage1_out[6]),
+    .w(PSI_16_INV_4),
+    .dout_0(stage2_out[2]),
+    .dout_1(stage2_out[6])
+);
+gs_butterfly_unit u23_gs_butterfly_unit(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .din_0(stage1_out[3]),
+    .din_1(stage1_out[7]),
+    .w(PSI_16_INV_4),
+    .dout_0(stage2_out[3]),
+    .dout_1(stage2_out[7])
+);
+
+gs_butterfly_unit u24_gs_butterfly_unit(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .din_0(stage1_out[8]),
+    .din_1(stage1_out[12]),
+    .w(PSI_16_INV_12),
+    .dout_0(stage2_out[8]),
+    .dout_1(stage2_out[12])
+);
+gs_butterfly_unit u25_gs_butterfly_unit(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .din_0(stage1_out[9]),
+    .din_1(stage1_out[13]),
+    .w(PSI_16_INV_12),
+    .dout_0(stage2_out[9]),
+    .dout_1(stage2_out[13])
+);
+gs_butterfly_unit u26_gs_butterfly_unit(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .din_0(stage1_out[10]),
+    .din_1(stage1_out[14]),
+    .w(PSI_16_INV_12),
+    .dout_0(stage2_out[10]),
+    .dout_1(stage2_out[14])
+);
+gs_butterfly_unit u27_gs_butterfly_unit(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .din_0(stage1_out[11]),
+    .din_1(stage1_out[15]),
+    .w(PSI_16_INV_12),
+    .dout_0(stage2_out[11]),
+    .dout_1(stage2_out[15])
+);
 
 // ----------------------------------------------------------------
 // Stage 0: {0.8} {1,9} {2,10} {3,11} {4,12} {5,13} {6,14} {7,15}

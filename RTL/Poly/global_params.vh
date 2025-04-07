@@ -17,6 +17,22 @@
 `define N_16_INV   935854081
 
 `define DATA_WIDTH 30
-`define ADDR_WIDTH 4
+`define BRAM_ADDR_WIDTH 12
+`define WROM_ADDR_WIDTH 13
+
+// Accumulation result maximum width
+`define ACC_WIDTH 34
+
+// Elememt-wise multiplication result width
+`define MULT_WIDTH 68
+
+`define EVAL_ROWS 81
+`define EVAL_COLS 16
+`define EVAL_NONZEROS 256
+
+`define POSTPROC_ROWS 16
+`define POSTPROC_COLS 81
+`define POSTPROC_NONZEROS 625
+
 
 `endif // GLOBAL_PARAMS_VH
