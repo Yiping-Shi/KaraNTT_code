@@ -60,6 +60,45 @@ def CTBasedMergedNTT_NR(A,Psi,q):
             
     return B
 
+def Radix2_DIT_INTT_RN(A,W_inv,q):
+    N_inv = modinv(len(A),q)
+    B = [(x*N_inv) % q for x in Radix2_DIT_NTT_RN(A,W_inv,q)]
+    return B
+
+# Iterative Radix-2 Decimation-in-Time (DIT) (CT) NTT - RN
+# A: input polynomial (bit-reversed order)
+# W: twiddle factor
+# q: modulus
+# B: output polynomial (standard order)
+def Radix2_DIT_NTT_RN(A,W,q):
+    N = len(A)
+    B = [_ for _ in A]
+
+    l = int(log(N,2))
+    v = int(N/2)
+    m = 1
+    d = 1
+
+    while m<N:
+        np = 2*m
+        lp = np*(v-1)
+        for k in range(m):
+            j = k
+            jl = k + lp
+            jt = k*v
+            Psi_pow = intReverse(m+k, l)
+            TW = pow(W, Psi_pow, q)
+            while j < (jl+1):
+                temp = (TW*B[j+d]) % q
+                B[j+d] = (B[j] - temp) % q
+                B[j]   = (B[j] + temp) % q
+                j = j+np
+        v = int(v/2)
+        m = 2*m
+        d = 2*d
+
+    return B
+
 # Merged INTT with post-processing (optimized) (iterative)
 # This is not NTT, this is pre-processing + NTT
 # (see: https://eprint.iacr.org/2016/504.pdf)
@@ -116,9 +155,132 @@ def NTTBasedModPolMul_NWC_merge(A,B,psi,psi_inv,q):
     
     C_ntt = [(x*y) % q for x,y in zip(A_ntt,B_ntt)]
     
-    C = GSBasedMergedINTT_RN(C_ntt,psi_inv,q)
+    # C = GSBasedMergedINTT_RN(C_ntt,psi_inv,q)
+    C = Radix2_DIT_INTT_RN(C_ntt,psi_inv,q)
     return C
 
+
+# NTT-Based Modular Polynomial Multiplication with f(x)=x^n+1 (Negative Wrapped Convolution)
+# -- with separate pre-processing and post-processing
+# A,B: n-1 degree polynomials
+# w, w_inv: twiddle factors
+# q: coefficient modulus
+# C: n-1 degree polynomial
+# C(x)=A(x)*B(X) --> C=PostProc(INTT_n(NTT_n(PreProc(A)) . NTT_n(PreProc(B))))
+def NTTBasedModPolMul_NWC_baseline(A,B,w,w_inv,psi,psi_inv,q):
+    A_p = [(x*pow(psi,i,q)) % q for i,x in enumerate(A)]
+    B_p = [(x*pow(psi,i,q)) % q for i,x in enumerate(B)]
+
+    A_ntt = Radix2_DIT_Iterative_NTT_NR(A_p,w,q)
+    B_ntt = Radix2_DIT_Iterative_NTT_NR(B_p,w,q)
+
+    C_ntt = [(x*y) % q for x,y in zip(A_ntt,B_ntt)]
+
+    # C_p = Radix2_DIF_Iterative_INTT_RN(C_ntt,w_inv,q)
+    C_p = Radix2_DIT_Iterative_INTT_RN(C_ntt,w_inv,q)
+
+    C = [(x*pow(psi_inv,i,q)) % q for i,x in enumerate(C_p)]
+    return C
+
+# From paper: NTTU: An Area-Efficient Low-POwer NTT-Uncoupled Architecture for NTT-Based Multiplication
+# Iterative Radix-2 Decimation-in-Time (DIT) (CT) NTT - NR
+# A: input polynomial (standard order)
+# W: twiddle factor
+# q: modulus
+# B: output polynomial (bit-reversed order)
+def Radix2_DIT_Iterative_NTT_NR(A,W,q):
+    N = len(A)
+    B = [_ for _ in A]
+
+    for s in range(int(log(N,2)),0,-1):
+        m = 2**s
+        for k in range(int(N/m)):
+            TW = pow(W,intReverse(k,int(log(N,2))-s)*int(m/2),q)
+            for j in range(int(m/2)):
+                u = B[k*m+j]
+                t = (TW*B[k*m+j+int(m/2)]) % q
+
+                B[k*m+j]          = (u+t) % q
+                B[k*m+j+int(m/2)] = (u-t) % q
+
+    return B
+
+def Radix2_DIT_Iterative_INTT_RN(A,W_inv,q):
+    N_inv = modinv(len(A),q)
+    B = [(x*N_inv) % q for x in Radix2_DIT_Iterative_NTT_RN(A,W_inv,q)]
+    return B
+
+# Iterative Radix-2 Decimation-in-Time (DIT) (CT) NTT - RN
+# A: input polynomial (bit-reversed order)
+# W: twiddle factor
+# q: modulus
+# B: output polynomial (standard order)
+def Radix2_DIT_Iterative_NTT_RN(A,W,q):
+    N = len(A)
+    B = [_ for _ in A]
+
+    v = int(N/2)
+    m = 1
+    d = 1
+
+    while m<N:
+        np = 2*m
+        lp = np*(v-1)
+        for k in range(m):
+            j = k
+            jl = k + lp
+            jt = k*v
+            TW = pow(W,jt,q)
+            while j < (jl+1):
+                temp = (TW*B[j+d]) % q
+                B[j+d] = (B[j] - temp) % q
+                B[j]   = (B[j] + temp) % q
+                j = j+np
+        v = int(v/2)
+        m = 2*m
+        d = 2*d
+
+    return B
+
+
+def Radix2_DIF_Iterative_INTT_RN(A,W_inv,q):
+    N_inv = modinv(len(A),q)
+    B = [(x*N_inv) % q for x in Radix2_DIF_Iterative_NTT_RN(A,W_inv,q)]
+    return B
+
+# Iterative Radix-2 Decimation-in-Frequency (DIF) (GS) NTT - RN
+# A: input polynomial (reversed order)
+# W: twiddle factor
+# q: modulus
+# B: output polynomial (bit-standard order)
+def Radix2_DIF_Iterative_NTT_RN(A,W,q):
+    N = len(A)
+    B = [_ for _ in A]
+
+    m = 1
+    v = N
+    d = 1
+
+    while v>1:
+        for jf in range(m):
+            j = jf
+            jt = 0
+            while j<(N-1):
+                # bit-reversing jt
+                TW = pow(W,intReverse(jt,int(log(N>>1,2))),q)
+
+                temp = B[j]
+
+                B[j]   = (temp + B[j+d]) % q
+                B[j+d] = (temp - B[j+d])*TW % q
+
+                jt = jt+1
+                j = j + 2*m
+        m = 2*m
+        v = int(v/2)
+        d = 2*d
+
+    return B
 
 # 保存结果到文件的函数
 def save_result_to_file(data, filename):
@@ -157,6 +319,7 @@ if __name__ == "__main__":
     C0_FILE = os.path.join(RESULTS_DIR, "C0.txt")
     C1_FILE = os.path.join(RESULTS_DIR, "C1.txt")
     N_FILE  = os.path.join(RESULTS_DIR, "N.txt")
+    N_BASELINE_FILE = os.path.join(RESULTS_DIR, "N_baseline.txt")
     
     # Random polynomial generation
     RANDOM_SEED = 2025
@@ -184,4 +347,17 @@ if __name__ == "__main__":
     save_result_to_file(N_merge, N_FILE)
     
     print("NTTBasedModPolMul_NWC_merge --> " + ("Correct" if(sum([abs(x-y) for x,y in zip(N_merge,C1)]) == 0) else "Wrong"))
+    print("")
+    
+    
+    # Check NTT-based polynomial multiplication methods for baseline
+    print("Computing N_baseline = NTTBasedModPolMul_NWC_baseline(A, B, w, w_inv, psi, psi_inv, q)...")
+    start_time = time.time()
+    N_baseline = NTTBasedModPolMul_NWC_baseline(A,B,w,w_inv,psi,psi_inv,q)
+    baseline_time = time.time() - start_time
+    print(f"N_baseline computation completed in {baseline_time:.2f} seconds.")
+    # Save N_baseline to file for future use
+    save_result_to_file(N_baseline, N_BASELINE_FILE)
+    
+    print("NTTBasedModPolMul_NWC_baseline --> " + ("Correct" if(sum([abs(x-y) for x,y in zip(N_baseline,C1)]) == 0) else "Wrong"))
     print("")
