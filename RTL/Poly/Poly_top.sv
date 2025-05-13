@@ -566,9 +566,9 @@ generate
             .clk(clk),
             .wen(wea), 
             .waddr(addr_wr[i_bram]),
-            .din(BU_data_in_a[i_bram]),
+            .din(CWM_data_out_a[i_bram]),
             .raddr(addr_rd[i_bram]),
-            .dout(BU_data_out_a[i_bram])
+            .dout(BU_data_in_a[i_bram])
         );
         
         BRAM #(
@@ -578,9 +578,9 @@ generate
             .clk(clk),
             .wen(web), 
             .waddr(addr_wr[i_bram]),
-            .din(BU_data_in_b[i_bram]),
+            .din(CWM_data_out_b[i_bram]),
             .raddr(addr_rd[i_bram]),
-            .dout(BU_data_out_b[i_bram])
+            .dout(BU_data_in_b[i_bram])
         );
     end
 endgenerate

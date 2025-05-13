@@ -25,27 +25,34 @@
   * [ ] Pymodel
     * [ ] NTT/INTT-16:   $INTT(NTT(A))==A$,  $INTT(NTT(A)\odot NTT(B))==C$
     * [ ] 4-stage-NTT
-  * [ ] RTL
-    * [ ] NTT/INTT_65536
-      * [ ] control logic (state machine)
-      * [ ] addr generator
-      * [ ] data reorder (in and out)
-      * [ ] Buffer
-        * [ ] BRAM
-        * [ ] WROM
-      * [ ] IFFT_16
-        * [ ] bit_reverse
-        * [ ] butterfly_stage0/1/2/3
-        * [ ] mod_add
-        * [ ] mod_sub
-        * [ ] mod_mul
-    * [ ] mod_mul x 16
+  * [X] RTL
+    * [X] NTT/INTT_65536
+
+      * [X] control logic (state machine)
+      * [X] addr generator
+
+      * ~~ data reorder (in and out)~~
+
+      * [X] Buffer
+
+        * [X] BRAM
+        * [X] WROM
+      * [X] IFFT_16
+
+        * ~~ bit_reverse~~
+
+        * [X] butterfly_stage0/1/2/3
+        * [X] mod_add
+        * [X] mod_sub
+        * [X] mod_mul
+    * [X] mod_mul x 16
 
 ## Tips
 
 - Get the information of utilization by module.
   - `report_utilization -hierarchical -file D:\\IDEA\\NTT_Kara_25\\utilization_by_module.rpt`
-- 
+- `report_timing -sort_by slack -max_paths 20 -path_type full -file D:\\IDEA\\NTT_Kara_25\\KaraNTT_code\\Reports\\Poly\\critical_paths.rpt`
+- `report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 100 -file timing_summary_detailed.rpt`
 
 ## Element-wise Multiplication Optimization
 
