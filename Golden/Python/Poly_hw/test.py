@@ -130,6 +130,47 @@ def Radix2_DIT_Iterative_INTT_RN(A,W,q):
 
     return B
 
+
+# Iterative Radix-2 Decimation-in-Frequency (DIF) (GS) NTT - RN
+# A: input polynomial (reversed order)
+# W: twiddle factor
+# q: modulus
+# B: output polynomial (bit-standard order)
+def Radix2_DIF_Iterative_INTT_RN(A,W,q):
+    N = len(A)
+    B = [_ for _ in A]
+
+    m = 1
+    v = N
+    d = 1
+
+    while v>1:
+        for jf in range(m):
+            j = jf
+            jt = 0
+            while j<(N-1):
+                # bit-reversing jt
+                TW = pow(W,intReverse(jt,int(log(N>>1,2))),q)
+
+                temp = B[j]
+
+                B[j]   = (temp + B[j+d]) % q
+                B[j+d] = (temp - B[j+d])*TW % q
+
+                jt = jt+1
+                j = j + 2*m
+        m = 2*m
+        v = int(v/2)
+        d = 2*d
+        
+    # 最后的步骤：乘以N的逆
+    N_inv = modinv(N, q)
+    for i in range(N):
+        B[i] = (B[i] * N_inv) % q
+
+    return B
+
+
 # ==========================================================
 
 # NTT-Based Modular Polynomial Multiplication with f(x)=x^n+1 (Negative Wrapped Convolution)
@@ -272,12 +313,20 @@ def GSBasedMergedINTT_RN(A,Psi,q):
 
 if __name__ == "__main__":
     # Parameters (NWC)
-    n       = 65536
+    # n       = 65536
+    # q       = 998244353
+    # w       = 80928016
+    # w_inv   = 163063506
+    # psi     = 8996
+    # psi_inv = 498345419
+    
+    # Parameters (NWC)
+    n       = 4096
     q       = 998244353
-    w       = 80928016
-    w_inv   = 163063506
-    psi     = 8996
-    psi_inv = 498345419
+    w       = 883940940
+    w_inv   = 226510976
+    psi     = 730033
+    psi_inv = 312023405
     
     # File paths
     RESULTS_DIR = "poly_schoolbook_results"
@@ -312,7 +361,7 @@ if __name__ == "__main__":
     # Save N to file for future use
     save_result_to_file(N_merge, N_FILE)
     
-    print("NTTBasedModPolMul_NWC_merge --> " + ("Correct" if(sum([abs(x-y) for x,y in zip(N_merge,C1)]) == 0) else "Wrong"))
+    # print("NTTBasedModPolMul_NWC_merge --> " + ("Correct" if(sum([abs(x-y) for x,y in zip(N_merge,C1)]) == 0) else "Wrong"))
     print("")
     
     

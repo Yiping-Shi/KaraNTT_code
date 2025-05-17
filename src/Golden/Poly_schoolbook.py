@@ -63,6 +63,25 @@ def SchoolbookModPolMul_NWC(A, B, q):
         D[i] = (C[i] - C[i + len(A)]) % q
     return D
 
+# # 保存结果到文件的函数
+# def save_result_to_file(data, filename):
+#     # 确保目录存在
+#     os.makedirs(os.path.dirname(filename), exist_ok=True)
+    
+#     print(f"Saving result to {filename}...")
+#     with open(filename, 'w') as f:
+#         json.dump(data, f)
+#     print(f"Result saved successfully to {filename}")
+
+# # 从文件加载结果的函数
+# def load_result_from_file(filename):
+#     if os.path.exists(filename):
+#         print(f"Loading result from {filename}...")
+#         with open(filename, 'r') as f:
+#             return json.loads(f.read())
+#     else:
+#         print(f"File {filename} not found. Need to compute the result.")
+#         return None
 # 保存结果到文件的函数
 def save_result_to_file(data, filename):
     # 确保目录存在
@@ -70,29 +89,28 @@ def save_result_to_file(data, filename):
     
     print(f"Saving result to {filename}...")
     with open(filename, 'w') as f:
-        json.dump(data, f)
-    print(f"Result saved successfully to {filename}")
+        # 每行写入一个元素
+        for item in data:
+            f.write(f"{item}\n")
+    print(f"Result saved successfully to {filename}: {len(data)} items")
 
 # 从文件加载结果的函数
 def load_result_from_file(filename):
     if os.path.exists(filename):
         print(f"Loading result from {filename}...")
+        data = []
         with open(filename, 'r') as f:
-            return json.loads(f.read())
+            for line in f:
+                # 移除行尾的换行符，转换为整数，并添加到结果列表
+                data.append(int(line.strip()))
+        print(f"Loaded {len(data)} items from {filename}")
+        return data
     else:
         print(f"File {filename} not found. Need to compute the result.")
         return None
 
-# ============================================================================
+
 if __name__ == "__main__":
-    # Parameters (NWC)
-    # n       = 65536
-    # q       = 998244353
-    # w       = 80928016
-    # w_inv   = 163063506
-    # psi     = 8996
-    # psi_inv = 498345419
-    
     # Parameters (NWC)
     n       = 4096
     q       = 998244353
@@ -102,7 +120,7 @@ if __name__ == "__main__":
     psi_inv = 312023405
     
     # File paths
-    RESULTS_DIR = "poly_schoolbook_results"
+    RESULTS_DIR = "Results"
     D0_FILE = os.path.join(RESULTS_DIR, "D0.txt")
     C0_FILE = os.path.join(RESULTS_DIR, "C0.txt")
     C1_FILE = os.path.join(RESULTS_DIR, "C1.txt")
@@ -118,7 +136,7 @@ if __name__ == "__main__":
     # reduce functions
     pwc  = [-1]+[0]*(n-1)+[1]
     nwc  =  [1]+[0]*(n-1)+[1]
-
+    
     print("-------- Sanity check for polynomial multiplication operations --------")
     print("")
     
@@ -134,26 +152,20 @@ if __name__ == "__main__":
         # Save D0 to file for future use
         save_result_to_file(D0, D0_FILE)
     else:
-        d0_time = 0  # Loaded from file    
+        d0_time = 0  # Loaded from file 
+        
+    print("\nComputing DR0 = PolRed(D0, pwc, q)...")
+    start_time = time.time()
+    DR0 = PolRed(D0, pwc, q)
+    dr0_time = time.time() - start_time
+    print(f"DR0 computation completed in {dr0_time:.2f} seconds.")
     
-    # print("Computing D0 = SchoolbookPolMul(A, B, q)...")
-    # start_time = time.time()
-    # D0 = SchoolbookPolMul(A, B, q)
-    # d0_time = time.time() - start_time
-    # print(f"D0 computation completed in {d0_time:.2f} seconds.")
-    
-    # print("\nComputing DR0 = PolRed(D0, pwc, q)...")
-    # start_time = time.time()
-    # DR0 = PolRed(D0, pwc, q)
-    # dr0_time = time.time() - start_time
-    # print(f"DR0 computation completed in {dr0_time:.2f} seconds.")
-    
-    # print("\nComputing DR1 = PolRed(D0, nwc, q)...")
-    # start_time = time.time()
-    # DR1 = PolRed(D0, nwc, q)
-    # dr1_time = time.time() - start_time
-    # print(f"DR1 computation completed in {dr1_time:.2f} seconds.")
-    
+    print("\nComputing DR1 = PolRed(D0, nwc, q)...")
+    start_time = time.time()
+    DR1 = PolRed(D0, nwc, q)
+    dr1_time = time.time() - start_time
+    print(f"DR1 computation completed in {dr1_time:.2f} seconds.")
+        
     
     # Try to load C0 from file, if not available, compute it
     C0 = load_result_from_file(C0_FILE)
@@ -182,42 +194,10 @@ if __name__ == "__main__":
         save_result_to_file(C1, C1_FILE)
     else:
         c1_time = 0  # Loaded from file
-    
-    # print("\nComputing C0 = SchoolbookModPolMul_PWC(A, B, q)...")
-    # start_time = time.time()
-    # C0 = SchoolbookModPolMul_PWC(A, B, q)
-    # c0_time = time.time() - start_time
-    # print(f"C0 computation completed in {c0_time:.2f} seconds.")
-    
-    # print("\nComputing C1 = SchoolbookModPolMul_NWC(A, B, q)...")
-    # start_time = time.time()
-    # C1 = SchoolbookModPolMul_NWC(A, B, q)
-    # c1_time = time.time() - start_time
-    # print(f"C1 computation completed in {c1_time:.2f} seconds.")
-    
-    print("\n--------- Summary of execution times ---------")
-    if d0_time > 0:
-        print(f"D0  (SchoolbookPolMul):        {d0_time:.2f} seconds")
-    else:
-        print(f"D0  (SchoolbookPolMul):        Loaded from file")
         
-    # print(f"DR0 (PolRed with x^n-1):       {dr0_time:.2f} seconds")
-    # print(f"DR1 (PolRed with x^n+1):       {dr1_time:.2f} seconds")
-    
-    if c0_time > 0:
-        print(f"C0  (SchoolbookModPolMul_PWC): {c0_time:.2f} seconds")
-    else:
-        print(f"C0  (SchoolbookModPolMul_PWC): Loaded from file")
-        
-    if c1_time > 0:
-        print(f"C1  (SchoolbookModPolMul_NWC): {c1_time:.2f} seconds")
-    else:
-        print(f"C1  (SchoolbookModPolMul_NWC): Loaded from file")
-        
-    print("--------------------------------------------")
     
     
-    # print("\nVerifying results:")
-    # print("SchoolbookModPolMul_PWC  --> " + ("Correct" if(sum([abs(x-y) for x,y in zip(DR0,C0)]) == 0) else "Wrong"))
-    # print("SchoolbookModPolMul_NWC  --> " + ("Correct" if(sum([abs(x-y) for x,y in zip(DR1,C1)]) == 0) else "Wrong"))
-    # print("")
+    print("\nVerifying results:")
+    print("SchoolbookModPolMul_PWC  --> " + ("Correct" if(sum([abs(x-y) for x,y in zip(DR0,C0)]) == 0) else "Wrong"))
+    print("SchoolbookModPolMul_NWC  --> " + ("Correct" if(sum([abs(x-y) for x,y in zip(DR1,C1)]) == 0) else "Wrong"))
+    print("")
